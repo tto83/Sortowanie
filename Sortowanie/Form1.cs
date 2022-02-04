@@ -24,35 +24,23 @@ namespace Sortowanie
             buttonGen.Enabled = true;
             buttonWybor.Enabled = false;
             checkBoxAnimacja.Checked = true;
+            buttonReset.Enabled = false;
             
-            //labelWagaLewa.Visible = false;
-            //labelWagaPrawa.Visible = false;
-
         }
 
         private void buttonGen_Click(object sender, EventArgs e)
         {
             buttonGen.Enabled = false;
             buttonWybor.Enabled = true;
+            buttonReset.Enabled = true;
             
 
             //Losowanie liczb
             Random los = new Random();
-            for(int i=0; i<liczby.Length; i++)
+            for (int i = 0; i < liczby.Length; i++)
             {
-                liczby[i] = los.Next(1,100);
+                liczby[i] = los.Next(1, 100);
             }
-
-            //Wyswietlanie liczb
-            /*
-            string strLiczby = "Losowe liczby: ";
-            for(int i = 0; i < (liczby.Length - 1); i++)
-            {
-                strLiczby += liczby[i].ToString() + " ,";
-            }
-            strLiczby += liczby[liczby.Length - 1].ToString();
-            labelTablica.Text = strLiczby;*/
-
 
             //Wpisanie do datagrid
             var index = this.dataGridView1.Rows.Add();
@@ -137,6 +125,7 @@ namespace Sortowanie
             buttonReset.Enabled = true;
             pictureBoxWagaCenter.Image = Sortowanie.Properties.Resources.scale;
             pictureBoxWagaCenter.Refresh();
+            buttonWybor.Enabled = false;
             System.Windows.Forms.MessageBox.Show("Sortowanie zakończone");
 
         }
@@ -187,7 +176,14 @@ namespace Sortowanie
             buttonGen.Enabled = true;
             buttonWybor.Enabled = false;
             checkBoxAnimacja.Checked = true;
-            Array.Clear(liczby,0, liczby.Length);
+            trackBarInterwalAnimacji.Enabled = true;
+
+            if(dataGridView1.Rows.Count != 0)
+            {
+                Array.Clear(liczby, 0, liczby.Length);
+            }
+
+            buttonReset.Enabled = false;
         }
 
         private void buttonWyjscie_Click(object sender, EventArgs e)
